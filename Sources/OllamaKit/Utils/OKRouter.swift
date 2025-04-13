@@ -17,6 +17,7 @@ internal enum OKRouter {
     case deleteModel(data: OKDeleteModelRequestData)
     case pullModel(data: OKPullModelRequestData)
     case embeddings(data: OKEmbeddingsRequestData)
+    case login(data: OKLoginRequestData)
     
     internal var path: String {
         switch self {
@@ -38,13 +39,15 @@ internal enum OKRouter {
             return "/api/pull"
         case .embeddings:
             return "/api/embeddings"
+        case .login:
+            return "/api/login"
         }
     }
     
     internal var method: String {
         switch self {
         case .root:
-            return "HEAD"
+            return "GET"
         case .models:
             return "GET"
         case .modelInfo:
@@ -60,6 +63,8 @@ internal enum OKRouter {
         case .pullModel:
             return "POST"
         case .embeddings:
+            return "POST"
+        case .login:
             return "POST"
         }
     }

@@ -83,8 +83,11 @@ public struct OKChatRequestData: Sendable {
         
         // Add messages if not empty
         if !messages.isEmpty {
-            let messagesString = messages.map { "\($0.role.rawValue):\($0.content)" }.joined(separator: ",")
-            params["messages"] = messagesString
+            let encoder = JSONEncoder()
+            if let jsonData = try? encoder.encode(messages),
+               let jsonString = String(data: jsonData, encoding: .utf8) {
+                params["messages"] = jsonString
+            }
         }
         
         // Sort parameters by key
