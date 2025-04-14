@@ -40,7 +40,7 @@ internal enum OKRouter {
         case .embeddings:
             return "/api/embeddings"
         case .login:
-            return "/api/login"
+            return "/api/apple/login"
         }
     }
     

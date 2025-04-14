@@ -21,7 +21,7 @@ public struct OllamaKit: Sendable {
     public init() {
         let router = OKRouter.self
         self.router = router
-        self.baseURL = URL(string: "http://localhost:11434")!
+        self.baseURL = URL(string: "http://192.168.110.32:9088")!
     }
     
     /// Initializes a new instance of `OllamaKit` with a custom base URL for the Ollama API.
