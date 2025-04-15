@@ -97,6 +97,8 @@ extension OKRouter {
             request.httpBody = try JSONEncoder.default.encode(data)
         case .embeddings(let data):
             request.httpBody = try JSONEncoder.default.encode(data)
+        case .login(let data):
+            request.httpBody = try JSONEncoder.default.encode(data)
         default:
             break
         }
