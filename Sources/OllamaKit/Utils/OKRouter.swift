@@ -75,7 +75,7 @@ internal enum OKRouter {
 }
 
 extension OKRouter {
-    func asURLRequest(with baseURL: URL, _ header: [String: String]?) throws -> URLRequest {
+    func asURLRequest(with baseURL: URL, headers header: [String: String]? = [:]) throws -> URLRequest {
         let url = baseURL.appendingPathComponent(path)
         
         var request = URLRequest(url: url)

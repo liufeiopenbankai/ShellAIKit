@@ -20,8 +20,8 @@ extension OllamaKit {
     ///
     /// - Parameter data: The ``OKCopyModelRequestData`` containing the details needed to copy the model.
     /// - Throws: An error if the request to copy the model fails.
-    public func login(data: OKLoginRequestData) async throws -> OKLoginResponse {
-        let request = try OKRouter.login(data: data).asURLRequest(with: baseURL)
+    public func login(data: OKLoginRequestData, headers: [String:String]? ) async throws -> OKLoginResponse {
+        let request = try OKRouter.login(data: data).asURLRequest(with: baseURL,headers: headers)
         
         return try await OKHTTPClient.shared.send(request: request, with: OKLoginResponse.self)
     }

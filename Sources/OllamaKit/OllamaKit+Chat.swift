@@ -97,9 +97,9 @@ extension OllamaKit {
     ///
     /// - Parameter data: The ``OKChatRequestData`` used to initiate the chat streaming from the Ollama API.
     /// - Returns: An `AsyncThrowingStream<OKChatResponse, Error>` emitting the live stream of chat responses from the Ollama API.
-    public func chat(data: OKChatRequestData) -> AsyncThrowingStream<OKChatResponse, Error> {
+    public func chat(data: OKChatRequestData, headers: [String:String]? ) -> AsyncThrowingStream<OKChatResponse, Error> {
         do {
-            let request = try OKRouter.chat(data: data).asURLRequest(with: baseURL)
+            let request = try OKRouter.chat(data: data).asURLRequest(with: baseURL, headers: headers)
             
             return OKHTTPClient.shared.stream(request: request, with: OKChatResponse.self)
         } catch {
