@@ -28,12 +28,15 @@ public struct OKChatRequestData: Sendable {
     /// Optional ``OKCompletionOptions`` providing additional configuration for the chat request.
     public var options: OKCompletionOptions?
     
-    public init(model: String, messages: [Message], tools: [OKJSONValue]? = nil, format: OKJSONValue? = nil) {
+    public let sessionId: String?
+    
+    public init(model: String, messages: [Message], tools: [OKJSONValue]? = nil, format: OKJSONValue? = nil, conversationId: String?) {
         self.stream = tools == nil
         self.model = model
         self.messages = messages
         self.tools = tools
         self.format = format
+        self.sessionId = conversationId
     }
     
     /// A structure that represents a single message in the chat request.
@@ -75,6 +78,7 @@ extension OKChatRequestData: Encodable {
         try container.encode(messages, forKey: .messages)
         try container.encodeIfPresent(tools, forKey: .tools)
         try container.encodeIfPresent(format, forKey: .format)
+        try container.encodeIfPresent(sessionId, forKey: .sessionId)
 
         if let options {
             try options.encode(to: encoder)
@@ -82,6 +86,6 @@ extension OKChatRequestData: Encodable {
     }
     
     private enum CodingKeys: String, CodingKey {
-        case stream, model, messages, tools, format
+        case stream, model, messages, tools, format,sessionId
     }
 }

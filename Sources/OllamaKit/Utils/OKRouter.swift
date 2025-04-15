@@ -75,12 +75,18 @@ internal enum OKRouter {
 }
 
 extension OKRouter {
-    func asURLRequest(with baseURL: URL) throws -> URLRequest {
+    func asURLRequest(with baseURL: URL, _ header: [String: String]?) throws -> URLRequest {
         let url = baseURL.appendingPathComponent(path)
         
         var request = URLRequest(url: url)
         request.httpMethod = method
-        request.allHTTPHeaderFields = headers
+        if let _headers = header {
+            let mergedHeaders = headers.merging(_headers) { _, new in new }
+            request.allHTTPHeaderFields = mergedHeaders
+        } else {
+            request.allHTTPHeaderFields = headers
+        }
+        
         
         switch self {
         case .modelInfo(let data):
