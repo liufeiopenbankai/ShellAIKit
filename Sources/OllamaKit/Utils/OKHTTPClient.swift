@@ -22,6 +22,9 @@ internal extension OKHTTPClient {
     
     func send<T: Decodable>(request: URLRequest, with responseType: T.Type) async throws -> T {
         let (data, response) = try await URLSession.shared.data(for: request)
+//        if let data1 = data {
+            print(String(data: data, encoding: .utf8) ?? "Invalid UTF8")
+//        }
         try validate(response: response)
         
         return try decoder.decode(T.self, from: data)
